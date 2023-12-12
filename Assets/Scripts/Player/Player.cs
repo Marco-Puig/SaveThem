@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     // Examples of a player attribute (should be used put a Scriptable Object (data container) (e,g. PlayerStats.speed)
     [SerializeField, Range(0f, 0.05f)] float speed = 0.002f;
-    static float slideTime = 0.5f;
+    [SerializeField, Range(0f, 1f)] float slideTime = 0.5f;
     float slideCooldown = 0f;
 
     void Start()
