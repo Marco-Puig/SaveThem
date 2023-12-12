@@ -11,4 +11,4 @@ A game where there is a room of players fighting to get an earpiece, and the one
 - Potentially a Mobile release, this would be fun to play on a phone in the sort of way Among Us is.
 
 ## Requirements
-Unity 2021.3.26f1
+- Unity 2021.3.26f1
