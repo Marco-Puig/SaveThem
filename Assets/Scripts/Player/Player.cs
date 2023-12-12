@@ -63,6 +63,10 @@ public class Player : MonoBehaviour
         Debug.Log("Player is waiting...");
     }
     
+    void Idle()
+    {
+        // add state transition from idle to move and vise versa
+    }
 
     // These are what we give to our event in our eventsystem for the game manager singleton
     void WaitForRound()
