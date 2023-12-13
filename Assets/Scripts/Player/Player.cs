@@ -32,8 +32,8 @@ public class Player : MonoBehaviour
         float moveX = player.position.x;
         float moveY = player.position.y;
 
-        moveX += Input.GetAxis("Horizontal") * speed;
-        moveY += Input.GetAxis("Vertical") * speed;
+        moveX += Input.GetAxis("Horizontal") * speed * (1 + Time.deltaTime);
+        moveY += Input.GetAxis("Vertical") * speed * (1 + Time.deltaTime);
 
         player.position = new Vector2(moveX, moveY);
 
@@ -47,8 +47,8 @@ public class Player : MonoBehaviour
         float moveX = player.position.x;
         float moveY = player.position.y;
 
-        moveX += Input.GetAxis("Horizontal") * speed * 2;
-        moveY += Input.GetAxis("Vertical") * speed * 2;
+        moveX += Input.GetAxis("Horizontal") * speed * (1 + Time.deltaTime) * 2;
+        moveY += Input.GetAxis("Vertical") * speed * (1 + Time.deltaTime) * 2;
 
         player.position = new Vector2(moveX, moveY);
 
