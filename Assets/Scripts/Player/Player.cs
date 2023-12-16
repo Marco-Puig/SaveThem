@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     private PlayerState currentState;
 
     // Examples of a player attribute (should be used put a Scriptable Object (data container) (e,g. PlayerStats.speed)
-    [SerializeField, Range(0f, 0.05f)] float speed = 0.002f;
+    [Header ("Player Stats")]
+    [SerializeField, Range(0f, 20f)] float speed = 2f;
     [SerializeField, Range(0f, 1f)] float slideTime = 0.5f;
     float slideCooldown = 0f;
 
@@ -32,8 +33,8 @@ public class Player : MonoBehaviour
         float moveX = player.position.x;
         float moveY = player.position.y;
 
-        moveX += Input.GetAxis("Horizontal") * speed * (1 + Time.deltaTime);
-        moveY += Input.GetAxis("Vertical") * speed * (1 + Time.deltaTime);
+        moveX += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        moveY += Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
         player.position = new Vector2(moveX, moveY);
 
@@ -47,8 +48,8 @@ public class Player : MonoBehaviour
         float moveX = player.position.x;
         float moveY = player.position.y;
 
-        moveX += Input.GetAxis("Horizontal") * speed * (1 + Time.deltaTime) * 2;
-        moveY += Input.GetAxis("Vertical") * speed * (1 + Time.deltaTime) * 2;
+        moveX += Input.GetAxis("Horizontal") * speed * Time.deltaTime * 2;
+        moveY += Input.GetAxis("Vertical") * speed * Time.deltaTime * 2;
 
         player.position = new Vector2(moveX, moveY);
 

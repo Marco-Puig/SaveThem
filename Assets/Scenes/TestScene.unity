@@ -1036,10 +1036,10 @@ RectTransform:
   m_Father: {fileID: 107679549}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -585.4, y: 331.922}
-  m_SizeDelta: {x: -1199.4935, y: -697.6216}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 149.09998, y: -34.078003}
+  m_SizeDelta: {x: 269.50647, y: 34.378418}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1071388779
 MonoBehaviour:
@@ -1951,6 +1951,10 @@ PrefabInstance:
     - target: {fileID: 3710390083303532000, guid: cc53fed6595093848996baf97d8884cb, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710390083303532030, guid: cc53fed6595093848996baf97d8884cb, type: 3}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3710390083303532031, guid: cc53fed6595093848996baf97d8884cb, type: 3}
       propertyPath: m_RootOrder
