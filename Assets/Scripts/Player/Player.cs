@@ -3,12 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPunCallbacks
 {
     // You could change from Transform to Rigidbody2D for a physics-based implementation (e.g. sliding)
     private Transform player;
-
-    PhotonView photonView;
 
     private delegate void PlayerState();
     private PlayerState currentState;
@@ -19,14 +17,13 @@ public class Player : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float slideTime = 0.5f;
     float slideCooldown = 0f;
 
-    void Start()
+    private void Start()
     {  
         player = GetComponent<Transform>();
-        photonView = GetComponent<PhotonView>();
         currentState = Moving;
     }
 
-    void Update()
+    private void Update()
     {
         if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
         {

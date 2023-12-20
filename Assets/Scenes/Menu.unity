@@ -1645,6 +1645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LobbyManagerUI: {fileID: 1121208680}
+  playerPrefab: {fileID: 3710390083303532000, guid: cc53fed6595093848996baf97d8884cb, type: 3}
 --- !u!4 &1227394407
 Transform:
   m_ObjectHideFlags: 0

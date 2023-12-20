@@ -1,17 +1,20 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
-using System.Linq;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
-    // when in game, refer to these
-    [Header("In Game")]
-    [SerializeField]
-    GameObject LobbyManagerUI;
+    // Singleton design, instance
+    public static LobbyManager Instance { get; private set; }
 
-    // singleton design, instance
-    public static LobbyManager instance;
+    // When in game, refer to these
+    [Header("In Game")]
+    [SerializeField] GameObject LobbyManagerUI;
+    [SerializeField] string gameScene = "TestScene";
+
+    [Header("Instances")]
+    // Spawn unique player object to represents the player themselves in game on the network / lobby instance
+    public GameObject playerPrefab;
 
     private void Awake()
     {
@@ -19,12 +22,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         if (lobbyManagers.Length > 1)
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
 
-        LobbyManager instance = this;
+        Instance = this;
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this);
     }
 
     #region Public Methods
@@ -47,7 +50,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             return;
         }
         Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-        PhotonNetwork.LoadLevel("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
+        PhotonNetwork.LoadLevel(gameScene);
     }
 
     #endregion
@@ -61,7 +64,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             // Load the Room Level.
             LobbyManagerUI.SetActive(true);
-            PhotonNetwork.LoadLevel(1); // change to 1
+            PhotonNetwork.LoadLevel(1);
+
+            // Instantiate player
+            if (PlayerManager.LocalPlayerInstance == null)
+            {
+                PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(-6f, 9f), -2.5f, 0f), Quaternion.identity, 0);
+            }
         }
     }
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player otherPlayer)
@@ -88,7 +97,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    /// Called when the local player left the room. We need to load the Menu/Lobby scene.
+    // Called when the local player left the room. We need to load the Menu/Lobby scene.
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
