@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class Player : MonoBehaviour
 {
     // You could change from Transform to Rigidbody2D for a physics-based implementation (e.g. sliding)
     private Transform player;
+
+    PhotonView photonView;
 
     private delegate void PlayerState();
     private PlayerState currentState;
@@ -19,11 +22,16 @@ public class Player : MonoBehaviour
     void Start()
     {  
         player = GetComponent<Transform>();
+        photonView = GetComponent<PhotonView>();
         currentState = Moving;
     }
 
     void Update()
     {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        {
+            return;
+        }
         currentState.Invoke();
     }
 

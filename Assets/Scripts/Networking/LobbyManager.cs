@@ -5,11 +5,15 @@ using System.Linq;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
+    // when in game, refer to these
     [Header("In Game")]
     [SerializeField]
     GameObject LobbyManagerUI;
 
-    public void Awake()
+    // singleton design, instance
+    public static LobbyManager instance;
+
+    private void Awake()
     {
         GameObject[] lobbyManagers = GameObject.FindGameObjectsWithTag("LobbyManager");
 
@@ -17,6 +21,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             Destroy(this.gameObject);
         }
+
+        LobbyManager instance = this;
 
         DontDestroyOnLoad(this.gameObject);
     }
