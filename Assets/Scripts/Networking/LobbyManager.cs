@@ -1,13 +1,31 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
+    [Header("In Game")]
+    [SerializeField]
+    GameObject LobbyManagerUI;
+
+    public void Awake()
+    {
+        GameObject[] lobbyManagers = GameObject.FindGameObjectsWithTag("LobbyManager");
+
+        if (lobbyManagers.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     #region Public Methods
 
     public void LeaveRoom()
     {
+        LobbyManagerUI.SetActive(false);
         PhotonNetwork.LeaveRoom();
     }
 
@@ -36,12 +54,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             // Load the Room Level.
-            PhotonNetwork.LoadLevel(1);
+            LobbyManagerUI.SetActive(true);
+            PhotonNetwork.LoadLevel(1); // change to 1
         }
     }
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player otherPlayer)
     {
-        // Debug.LogFormat("OnPlayerEnteredRoom() {0}", otherPlayer.NickName); // not seen if you're the player connecting
+        Debug.LogFormat("OnPlayerEnteredRoom() {0}", otherPlayer.NickName); // not seen if you're the player connecting
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -53,11 +72,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-        // Debug.LogFormat("OnPlayerLeftRoom() {0}", otherPlayer.NickName); // seen when other disconnects
+        Debug.LogFormat("OnPlayerLeftRoom() {0}", otherPlayer.NickName); // seen when other disconnects
 
         if (PhotonNetwork.IsMasterClient)
         {
-            // Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+            Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
 
             LoadRoom();
         }
