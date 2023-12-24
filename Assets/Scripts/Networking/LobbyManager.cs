@@ -59,18 +59,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        // Instantiate player
+        if (PlayerManager.LocalPlayerInstance == null)
+        {
+            PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(-6f, 9f), -2.5f, 0f), Quaternion.identity, 0);
+        }
+
         // We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             // Load the Room Level.
             LobbyManagerUI.SetActive(true);
             PhotonNetwork.LoadLevel(1);
-
-            // Instantiate player
-            if (PlayerManager.LocalPlayerInstance == null)
-            {
-                PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(-6f, 9f), -2.5f, 0f), Quaternion.identity, 0);
-            }
         }
     }
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player otherPlayer)
