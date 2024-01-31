@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
-public class FetchPlayerData : MonoBehaviour
+public class FetchPlayerData : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     TMP_Text playerName;
@@ -19,6 +20,7 @@ public class FetchPlayerData : MonoBehaviour
 
     string GetName()
     {
+        PlayerPrefs.SetString("PlayerName", photonView.Owner.NickName);
         return PlayerPrefs.GetString("PlayerName");
     }
 
