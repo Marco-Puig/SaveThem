@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    GameManager Instance;
 
-    void Awake()
+    #region Initialize
+    public static GameManager Instance { get; private set;}
+    private void Awake()
     {
         if (Instance == null) { Instance = this; }
     }
 
-    void Start()
-    {
-        Countdown countDown = new Countdown(30f);
-    }
+    #endregion
 
-    void StartRound()
+    #region Public Methods
+    public void StartRound()
     {
         Debug.Log("Starting Game");
         // switch all players' state from waiting to moving (for loop and .tag == "Player")
         // shuffle/randomize location of ear pieces
     }
+
+    #endregion
 }

@@ -17,6 +17,7 @@ using ExitGames.Client.Photon;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace Photon.Pun.UtilityScripts
 {
@@ -50,6 +51,9 @@ namespace Photon.Pun.UtilityScripts
 
         [Header("Reference to a Text component for visualizing the countdown")]
         public Text Text;
+
+        [Header("Functions that will occur when countdown hits 0")]
+        public UnityEvent unityEvent;
 
 
         /// <summary>
@@ -89,6 +93,7 @@ namespace Photon.Pun.UtilityScripts
             if (countdown > 0.0f) return;
 
             OnTimerEnds();
+            
         }
 
 
