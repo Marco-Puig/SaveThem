@@ -64,7 +64,14 @@ namespace Photon.Pun.UtilityScripts
 
         public void Start()
         {
-            if (this.Text == null) Debug.LogError("Reference to 'Text' is not set. Please set a valid reference.", this);
+            if (this.Text == null)
+            {
+                Debug.LogError("Reference to 'Text' is not set. Please set a valid reference.", this);
+                return;
+            }
+
+            Initialize();             
+
         }
 
         public override void OnEnable()
@@ -93,7 +100,8 @@ namespace Photon.Pun.UtilityScripts
             if (countdown > 0.0f) return;
 
             OnTimerEnds();
-            
+            unityEvent.Invoke();
+            Destroy(this.gameObject);
         }
 
 
