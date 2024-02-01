@@ -17,7 +17,7 @@ public class Countdown : MonoBehaviour
     void Tick()
     {
         time += Time.deltaTime;
-        timerText.text = time;
+        timerText.text = time.ToString();
 
         if (time >= waitTime)
         {
