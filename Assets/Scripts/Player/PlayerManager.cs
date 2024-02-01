@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviourPunCallbacks
+// Just making the player non-destroyable for PUN to keep track between scenes.
+
+public class PlayerManager : MonoBehaviourPunCallbacks 
 {
     public static GameObject LocalPlayerInstance;
 

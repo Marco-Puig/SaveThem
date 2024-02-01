@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,15 @@ public class FetchPlayerData : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        playerName.text = GetName();
-        currentLobby.text = GetLobbyCode();
+        try 
+        {
+            playerName.text = GetName();
+            currentLobby.text = GetLobbyCode();            
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     string GetName()
@@ -28,6 +36,4 @@ public class FetchPlayerData : MonoBehaviourPunCallbacks
     {
         return "Lobby Code: " + PlayerPrefs.GetString("LobbyCode");
     }
-
-    // in the future when fetching data make sure to use try catch
 }
