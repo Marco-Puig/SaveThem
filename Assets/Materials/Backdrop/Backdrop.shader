@@ -44,6 +44,7 @@ Shader "Hidden/Backdrop"
 
             const static float3 _WaveColorHSV = float3(0.8, 0.5, 0.5);
             const static float3 _EdgeColorRGB = float3(0, 0, 0);
+            const static float _EdgeStrength = 3.14;
             const static float _DepthHueFactor = 0.25;
             const static float _DepthSatFactor = 0.5;
             const static float _DepthValFactor = -0.1;
@@ -85,7 +86,7 @@ Shader "Hidden/Backdrop"
                     if(uv.y < waveHeight)
                     {
                         // make an edge factor based on the absolute of the distance of the y coord from the wave height
-                        float edgeFactor = min(abs(uv.y - waveHeight) * 5, 1);
+                        float edgeFactor = min(abs(uv.y - waveHeight) * _EdgeStrength, 1);
 
                         // apply hue shift & lerp colors, then darken with depth
                         return float4(lerp(hsv2rgb(float3(
