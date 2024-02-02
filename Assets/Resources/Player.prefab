@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e1de4bef8722b4386e71d909098734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasEarpiece: 0
   speed: 3
   slideTime: 0.5
 --- !u!114 &-1823125348029915014

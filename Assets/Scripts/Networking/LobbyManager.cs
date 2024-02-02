@@ -9,7 +9,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     // When in game, refer to these
     [Header("In Game")]
-    public static GameObject LobbyManagerUI;
+    [SerializeField] GameObject LobbyManagerUI;
     [SerializeField] string gameScene = "TestScene";
 
     [Header("Instances")]

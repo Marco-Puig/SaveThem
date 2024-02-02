@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
     #region Initialize
     public static GameManager Instance { get; private set; }
@@ -19,16 +19,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // setup countdown for lobby wait and rounds
-        if (PhotonNetwork.IsMasterClient)
+        if (photonView.IsMine)
         {
             countdown = this.gameObject.GetComponent<Countdown>();
-            LobbyWait();
+            photonView.RPC("LobbyWait", RpcTarget.AllBuffered);
         }
     }
 
     #endregion
 
     # region Private Methods
+    [PunRPC]
     void LobbyWait()
     {
         // wait for players to join for 60 seconds
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         int playersLeft = 0;
+
         for (int i = 0; i < players.Length; i++)
         {
             if (players[i].GetComponent<Player>().hasEarpiece)
@@ -87,6 +89,7 @@ public class GameManager : MonoBehaviour
                 players[i].GetComponent<Player>().currentState = players[i].GetComponent<Player>().Loser;
             }
         }
+
         if (playersLeft <= 1)
         {
             EndGame();

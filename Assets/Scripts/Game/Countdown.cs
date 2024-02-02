@@ -6,7 +6,7 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class Countdown : MonoBehaviour
+public class Countdown : MonoBehaviourPun
 { 
     private float waitTime = 60.0f;
     private string timeMessage;
@@ -24,7 +24,10 @@ public class Countdown : MonoBehaviour
 
     void Update()
     {
-        Tick();
+        if (photonView.IsMine)
+        {
+            photonView.RPC("Tick", RpcTarget.AllBuffered);
+        }
     }
 
     [PunRPC]
