@@ -50,6 +50,8 @@ Shader "Hidden/Backdrop"
             const static float _DepthValFactor = -0.1;
             const static float _TimeHueShiftFactor = 0.1;
 
+            const static int _PixelScale = 10;
+
             // simple wave height function using sin waves and time
             float getWaveHeight(float x)
             {
@@ -71,6 +73,9 @@ Shader "Hidden/Backdrop"
             {
                 // sore uv with an offset to prevent effect cutoff
                 float2 uv = float2(p.uv.x * _ScreenParams.x, p.uv.y - (1.0 / _LayerCount) - _WaveAmplitude);
+
+                float2 pixelFactor = float2(_PixelScale / _ScreenParams.x, _PixelScale / _ScreenParams.y);
+                uv = floor(uv / pixelFactor) * pixelFactor;
 
                 // calculate wave heights
                 [unroll] // unroll makes the compiler unroll the for loop into a sequence of statements - less overhead
