@@ -8,8 +8,8 @@ public class Player : MonoBehaviourPunCallbacks
     // You could change from Transform to Rigidbody2D for a physics-based implementation (e.g. sliding)
     private Transform player;
 
-    private delegate void PlayerState();
-    private PlayerState currentState;
+    public delegate void PlayerState();
+    [HideInInspector] public PlayerState currentState;
 
     // Examples of a player attribute (should be used put a Scriptable Object (data container) (e,g. PlayerStats.speed)
     [Header ("Player Stats")]
@@ -33,7 +33,7 @@ public class Player : MonoBehaviourPunCallbacks
     }
 
     // States
-    void Moving() 
+    public void Moving() 
     {
         float moveX = player.position.x;
         float moveY = player.position.y;
@@ -63,25 +63,14 @@ public class Player : MonoBehaviourPunCallbacks
         else slideCooldown -= Time.deltaTime;
     }
 
-    void Waiting()
+    public void Waiting()
     {
         // for if we wait for the round or something that requires the player to not move
-        Debug.Log("Player is waiting...");
+        // Debug.Log("Player is waiting...");
     }
     
     void Idle()
     {
         // add state transition from idle to move and vise versa
-    }
-
-    // These are what we give to our event in our eventsystem for the game manager singleton
-    void WaitForRound()
-    {
-        currentState = Waiting;
-    }
-  
-    void StartRound()
-    {   
-        currentState = Moving;
     }
 }
