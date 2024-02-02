@@ -33,17 +33,21 @@ public class GameManager : MonoBehaviour
     {
         // wait for players to join for 60 seconds
         countdown.Setup(WaitForRound, 60.0f, "Game starts in");
+        LobbyManager.Instance.MakeLobbyUnJoinable();
     }
     void StartRound()
     {
         SetPlayersState("Moving");
 
+        // TODO: INSTANTIATE EARPIECES
+
         // at round end, call WaitForRound
-        countdown.Setup(WaitForRound, 20.0f, "Round ends in");
+        countdown.Setup(WaitForRound, 30.0f, "Round ends in");
     }
     void WaitForRound()
     {
         SetPlayersState("Waiting");
+        CheckForLoser();
 
         // Transition to Start Wait
         countdown.Setup(StartRound, 5.0f, "Next round starts in");
@@ -65,6 +69,43 @@ public class GameManager : MonoBehaviour
                 default:
                     Debug.LogError("Invalid state");
                     break;
+            }
+        }
+    }
+    void CheckForLoser()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        int playersLeft = 0;
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].GetComponent<Player>().hasEarpiece)
+            {
+                playersLeft++;
+            }
+            else
+            {
+                players[i].GetComponent<Player>().currentState = players[i].GetComponent<Player>().Loser;
+            }
+        }
+        if (playersLeft <= 1)
+        {
+            EndGame();
+        }
+    }
+    void EndGame()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].GetComponent<Player>().hasEarpiece)
+            {
+                players[i].GetComponent<Player>().currentState = players[i].GetComponent<Player>().Winner;
+                countdown.Setup(LobbyManager.Instance.ShutdownLobby, 60.0f, "A WINNER HAS BEEN DECIDED! Ending game in");
+            }
+            else
+            {
+                players[i].GetComponent<Player>().currentState = players[i].GetComponent<Player>().Loser;
+                countdown.Setup(StartRound, 25.0f, "NO WINNER! Rematch game starts in");
             }
         }
     }

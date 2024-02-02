@@ -9,7 +9,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     // When in game, refer to these
     [Header("In Game")]
-    [SerializeField] GameObject LobbyManagerUI;
+    public static GameObject LobbyManagerUI;
     [SerializeField] string gameScene = "TestScene";
 
     [Header("Instances")]
@@ -36,6 +36,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         LobbyManagerUI.SetActive(false);
         PhotonNetwork.LeaveRoom();
+    }
+
+    public void MakeLobbyUnJoinable()
+    {
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+    }
+
+    public void ShutdownLobby()
+    {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
     }
 
     #endregion

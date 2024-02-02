@@ -7,7 +7,7 @@ public class Player : MonoBehaviourPunCallbacks
 {
     // You could change from Transform to Rigidbody2D for a physics-based implementation (e.g. sliding)
     private Transform player;
-
+    public bool hasEarpiece = false;
     public delegate void PlayerState();
     [HideInInspector] public PlayerState currentState;
 
@@ -41,6 +41,8 @@ public class Player : MonoBehaviourPunCallbacks
         moveX += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         moveY += Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
+        // TODO: if not moving, then the player is idle
+
         player.position = new Vector2(moveX, moveY);
 
         // State transition for Sliding
@@ -67,6 +69,20 @@ public class Player : MonoBehaviourPunCallbacks
     {
         // for if we wait for the round or something that requires the player to not move
         // Debug.Log("Player is waiting...");
+    }
+
+    public void Loser()
+    {
+        // for if the player is out of the game
+        // O(n) and delete childern of the player once animation (!isPlaying)
+        // Debug.Log("Player is out of the game...");
+    }
+
+    public void Winner()
+    {
+        // for if the player is the last one standing
+        // dance animation
+        // Debug.Log("Player is the last one standing...");
     }
     
     void Idle()
