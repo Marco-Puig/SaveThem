@@ -24,13 +24,9 @@ public class Countdown : MonoBehaviourPun
 
     void Update()
     {
-        if (photonView.IsMine)
-        {
-            photonView.RPC("Tick", RpcTarget.AllBuffered);
-        }
+        Tick();
     }
 
-    [PunRPC]
     void Tick()
     {
         waitTime -= Time.deltaTime;

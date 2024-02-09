@@ -18,14 +18,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        GameObject[] lobbyManagers = GameObject.FindGameObjectsWithTag("LobbyManager");
-
-        if (lobbyManagers.Length > 1)
-        {
-            Destroy(this);
-        }
-
-        Instance = this;
+        // Singleton pattern
+        if (Instance == null) { Instance = this; }
 
         DontDestroyOnLoad(this);
     }
@@ -61,6 +55,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
         Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
         PhotonNetwork.LoadLevel(gameScene);
+        LobbyManagerUI.SetActive(true);
     }
 
     #endregion
@@ -79,9 +74,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             // Load the Room Level.
-            LobbyManagerUI.SetActive(true);
             PhotonNetwork.LoadLevel(1);
         }
+
+        LobbyManagerUI.SetActive(true);
     }
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player otherPlayer)
     {

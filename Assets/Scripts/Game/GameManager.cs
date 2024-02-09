@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviourPun
 {
     #region Initialize
     public static GameManager Instance { get; private set; }
-    Countdown countdown;
+    [SerializeField] Countdown countdown;
     
     private void Awake()
     {
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviourPun
         SetPlayersState("Moving");
 
         // TODO: INSTANTIATE EARPIECES
+
 
         // at round end, call WaitForRound
         countdown.Setup(WaitForRound, 30.0f, "Round ends in");
