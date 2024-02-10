@@ -34,12 +34,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void MakeLobbyUnJoinable()
     {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
     }
 
     public void ShutdownLobby()
     {
-        PhotonNetwork.CurrentRoom.IsOpen = false;
+        // same as LeaveRoom(), but i want this function to add anything additional in the future.
+        Instance.LeaveRoom();
     }
 
     #endregion

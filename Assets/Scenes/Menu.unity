@@ -2228,7 +2228,7 @@ GameObject:
   - component: {fileID: 1532160568}
   - component: {fileID: 1532160567}
   m_Layer: 5
-  m_Name: PandaMusic
+  m_Name: PandaBeats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2276,7 +2276,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Audio
 
-    Panda Music'
+    Panda Beats'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1e4bf3a493e440f43b52a0ce0d5b3287, type: 2}
   m_sharedMaterial: {fileID: 9117807951331375052, guid: 1e4bf3a493e440f43b52a0ce0d5b3287, type: 2}

@@ -15,6 +15,7 @@ public class Countdown : MonoBehaviourPun
     [HideInInspector] public FunctionCall functionCall;
 
     // This noooot constructor will allow us to re-use countdown for other than lobby wait.
+    // How it works: when the timer reaches 0, then call the passed in function.
     public void Setup(FunctionCall functionToCall, float timer, string timeMessage)
     {
         this.functionCall = functionToCall;

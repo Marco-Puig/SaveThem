@@ -76,6 +76,8 @@ public class Player : MonoBehaviourPunCallbacks
         // for if the player is out of the game
         // O(n) and delete childern of the player once animation (!isPlaying)
         // Debug.Log("Player is out of the game...");
+        // Remove player
+        // Destroy(gameObject);
     }
 
     public void Winner()
