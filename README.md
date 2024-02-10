@@ -10,7 +10,7 @@ SaveThem is a game where a room of players fighting to get an earpiece, and the 
 
 ## Platforms
 ### Web Release
-- Release on a website called SaveThem.io, with the official release being built using WebGL.
+- Release will be on a website called SaveThem.io, with the official release being built using WebGL.
 ### Mobile Release
 - Potentially a Mobile release, this would be fun to play on a phone in the sort of way Among Us is.
 
