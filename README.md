@@ -8,6 +8,9 @@ SaveThem is a game where a room of players fighting to get an earpiece, and the 
 ### Security Agent - By Grim
 ![image](https://github.com/Marco-Puig/SaveThem/assets/90495366/42dd9eea-46e5-405e-94d9-954fc4dfe979)
 
+## Animations - By Castor Sumner
+![IMG_2974](https://github.com/Marco-Puig/SaveThem/assets/90495366/30de9fb0-6eef-4201-b7c2-8a0938bce9a8)
+
 ## Platforms
 ### Web Release
 - Release will be on a website called SaveThem.io, with the official release being built using WebGL.
