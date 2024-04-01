@@ -10,6 +10,8 @@ SaveThem is a game where a room of players fighting to get an earpiece, and the 
 
 ## Animations - By Castor Sumner
 ![IMG_2974](https://github.com/Marco-Puig/SaveThem/assets/90495366/30de9fb0-6eef-4201-b7c2-8a0938bce9a8)
+![kazmaz_commission_agent_run](https://github.com/Marco-Puig/SaveThem/assets/90495366/b0ecf8dd-72a1-4956-8159-39486863bad9)
+
 
 ## Platforms
 ### Web Release
