@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 40a67bd175b4dbd4aaef06538c1ba604
+guid: 25f4c22113248ed449927f5fc13199bb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,91 +127,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: agentRoll_2
-      rect:
-        serializedVersion: 2
-        x: 521
-        y: 29
-        width: 221
-        height: 203
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f89ffaf619f4df24493ab0b11bc4eb34
-      internalID: -1626326761
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: agentRoll_3
-      rect:
-        serializedVersion: 2
-        x: 774
-        y: 9
-        width: 209
-        height: 226
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 35a483bbaf9afa24c93542813dbe3cb1
-      internalID: 808306466
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: agentRoll_4
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 10
-        width: 244
-        height: 210
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d767b325a8622f4b91db5ada2ceb9f1
-      internalID: 1199910228
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: agentRoll_7
-      rect:
-        serializedVersion: 2
-        x: 275
-        y: 14
-        width: 234
-        height: 206
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 657e1cad9e8504f41898ca5c6825da84
-      internalID: 1258444356
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -222,16 +138,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      agentRoll_0: 1395866551
-      agentRoll_1: -1026514744
-      agentRoll_2: -1626326761
-      agentRoll_3: 808306466
-      agentRoll_4: 1199910228
-      agentRoll_5: 1306434026
-      agentRoll_6: -132405557
-      agentRoll_7: 1258444356
-      agentRoll_8: -1701832304
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
