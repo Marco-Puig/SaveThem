@@ -1,14 +1,20 @@
 using System;
 using UnityEngine;
 using Photon.Pun;
-using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviourPun
 {
     #region Initialize
-    public static GameManager Instance { get; private set; }
+    public static GameManager Instance { get; private set; } 
+    
+    [Header("Round Management")]
     [SerializeField] Countdown countdown;
     [SerializeField] GameObject earPiecePrefab;
+
+    [Header("Lobby Setup")]
+    [SerializeField] GameObject lobby;
+    [SerializeField] GameObject mainRoom;
+    [SerializeField] bool useLobby = false;
 
 
     private void Awake()
@@ -47,6 +53,14 @@ public class GameManager : MonoBehaviourPun
 
         // Transition to Start Wait
         countdown.Setup(StartRound, 10.0f, "Next round starts in");
+
+        // make sure that lobby room is now game room
+        if (useLobby)
+        {
+            lobby.SetActive(false);
+            mainRoom.SetActive(true);
+        }
+
     }
 
     void StartRound()
