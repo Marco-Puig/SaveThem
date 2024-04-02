@@ -6,8 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviourPunCallbacks
 {
     // You could change from Transform to Rigidbody2D for a physics-based implementation (e.g. sliding)
-    [Header("Player Components")]
     private Transform player;
+    [Header("Player Components")]
     [SerializeField] private Animator animator;
     public bool hasEarpiece = false;
     public delegate void PlayerState();
@@ -31,13 +31,13 @@ public class Player : MonoBehaviourPunCallbacks
         {
             return;
         }
+
         currentState.Invoke();
     }
 
     // States
     public void Moving()
     {
-
         float moveX = player.position.x;
         float moveY = player.position.y;
 
@@ -50,18 +50,41 @@ public class Player : MonoBehaviourPunCallbacks
             currentState = Idle;
         }
 
+        // flip player based on direction
+        if (Input.GetKey(KeyCode.D))
+        {
+            player.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            player.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        animator.Play("Run");
 
         player.position = new Vector2(moveX, moveY);
 
         // State transition for Sliding
         if (!(slideCooldown > slideTime)) slideCooldown += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space) && slideCooldown > slideTime) currentState = Sliding;
+        if (Input.GetKeyDown(KeyCode.Space) && slideCooldown > slideTime) currentState = Rolling;
     }
 
-    void Sliding()
+    void  Rolling()
     {
         float moveX = player.position.x;
         float moveY = player.position.y;
+
+        // flip player based on direction
+        if (Input.GetKey(KeyCode.D))
+        {
+            player.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            player.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        animator.Play("Roll");
 
         moveX += Input.GetAxis("Horizontal") * speed * Time.deltaTime * 2;
         moveY += Input.GetAxis("Vertical") * speed * Time.deltaTime * 2;
@@ -81,8 +104,13 @@ public class Player : MonoBehaviourPunCallbacks
 
     public void Idle()
     {
-        // if the player isn't moving
-        // Debug.Log("Player is waiting...");
+        animator.Play("Idle");
+
+        // if the player is moving again
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            currentState = Moving;
+        }
     }
 
     public void Loser()
