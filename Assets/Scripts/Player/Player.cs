@@ -9,6 +9,7 @@ public class Player : MonoBehaviourPunCallbacks
     private Transform player;
     [Header("Player Components")]
     [SerializeField] private Animator animator;
+    [SerializeField] GameObject playerTag;
     public bool hasEarpiece = false;
     public delegate void PlayerState();
     [HideInInspector] public PlayerState currentState;
@@ -35,61 +36,27 @@ public class Player : MonoBehaviourPunCallbacks
         currentState.Invoke();
     }
 
+
     // States
+    
     public void Moving()
     {
-        float moveX = player.position.x;
-        float moveY = player.position.y;
-
-        moveX += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        moveY += Input.GetAxis("Vertical") * speed * Time.deltaTime;
-
-        // if not moving, then the player is idle
-        if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
-        {
-            currentState = Idle;
-        }
-
-        // flip player based on direction
-        if (Input.GetKey(KeyCode.D))
-        {
-            player.localRotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            player.localRotation = Quaternion.Euler(0, 180, 0);
-        }
+        // Handle Movement
+        CommandMove(speed);
 
         animator.Play("Run");
-
-        player.position = new Vector2(moveX, moveY);
 
         // State transition for Sliding
         if (!(slideCooldown > slideTime)) slideCooldown += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Space) && slideCooldown > slideTime) currentState = Rolling;
     }
 
-    void  Rolling()
+    public void Rolling()
     {
-        float moveX = player.position.x;
-        float moveY = player.position.y;
-
-        // flip player based on direction
-        if (Input.GetKey(KeyCode.D))
-        {
-            player.localRotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            player.localRotation = Quaternion.Euler(0, 180, 0);
-        }
+        // Handle Increased Movement
+        CommandMove(speed * 2);
 
         animator.Play("Roll");
-
-        moveX += Input.GetAxis("Horizontal") * speed * Time.deltaTime * 2;
-        moveY += Input.GetAxis("Vertical") * speed * Time.deltaTime * 2;
-
-        player.position = new Vector2(moveX, moveY);
 
         // State transition for back to Moving
         if (slideCooldown <= 0f) currentState = Moving;
@@ -127,5 +94,39 @@ public class Player : MonoBehaviourPunCallbacks
         // for if the player is the last one standing
         // dance animation
         // Debug.Log("Player is the last one standing...");
+    }
+
+
+    // Helper functions
+
+    // Command Pattern for Handling Input = Movement
+    private void CommandMove(float speedMult)
+    {
+        float moveX = player.position.x;
+        float moveY = player.position.y;
+
+        // flip player based on direction
+        if (Input.GetKey(KeyCode.D))
+        {
+            player.localRotation = Quaternion.Euler(0, 0, 0);
+            playerTag.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            player.localRotation = Quaternion.Euler(0, 180, 0);
+            playerTag.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        // Update player's position based on direction of input
+        moveX += Input.GetAxis("Horizontal") * speedMult * Time.deltaTime * 2;
+        moveY += Input.GetAxis("Vertical") * speedMult * Time.deltaTime * 2;
+
+        player.position = new Vector2(moveX, moveY);
+
+        // Whatever State it is called in, if there is no input, then switch to idle state
+        if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+        {
+            currentState = Idle;
+        }
     }
 }
