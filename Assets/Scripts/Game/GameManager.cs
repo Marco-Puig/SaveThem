@@ -8,14 +8,14 @@ public class GameManager : MonoBehaviourPun
     public static GameManager Instance { get; private set; } 
     
     [Header("Round Management")]
-    [SerializeField] Countdown countdown;
+    [SerializeField] Countdown countdown;    
+    [SerializeField] float waitTime = 60f;
     [SerializeField] GameObject earPiecePrefab;
 
     [Header("Lobby Setup")]
     [SerializeField] GameObject lobby;
     [SerializeField] GameObject mainRoom;
     [SerializeField] bool useLobby = false;
-
 
     private void Awake()
     {
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviourPun
     void LobbyWait()
     {
         // wait for players to join for 60 seconds
-        countdown.Setup(WaitForFirstRound, 60.0f, "Game starts in");
+        countdown.Setup(WaitForFirstRound, waitTime, "Game starts in");
     }
 
     void WaitForFirstRound()

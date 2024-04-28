@@ -1346,6 +1346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdown: {fileID: 1113501299}
+  waitTime: 1
   earPiecePrefab: {fileID: 8777516231185400028, guid: a60f925657db1364b93eb70e63a08cdf, type: 3}
   lobby: {fileID: 1655924673}
   mainRoom: {fileID: 264947734}

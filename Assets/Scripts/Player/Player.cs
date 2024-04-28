@@ -23,16 +23,18 @@ public class Player : MonoBehaviourPunCallbacks
     private void Start()
     {
         player = GetComponent<Transform>();
-        currentState = Moving;
+        currentState = Idle;
     }
 
     private void Update()
     {
+        // If this isn't the player's character, don't control this player (regarding network)
         if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
         {
             return;
         }
 
+        // Run current state
         currentState.Invoke();
     }
 
