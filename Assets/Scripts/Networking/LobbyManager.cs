@@ -1,6 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -21,6 +22,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // Singleton pattern
         if (Instance == null) { Instance = this; }
 
+        // Ensure only one lobby manager exists
+        GameObject[] lobbyManagers = GameObject.FindGameObjectsWithTag("LobbyManager");
+        if (lobbyManagers.Length > 1)
+        {
+            Destroy(gameObject);
+        }
+
         DontDestroyOnLoad(this);
     }
 
@@ -40,7 +48,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void ShutdownLobby()
     {
-        // same as LeaveRoom(), but i want this function to add anything additional in the future.
+        // Same as LeaveRoom(), but I want this function to add anything additional in the future.
         Instance.LeaveRoom();
     }
 
@@ -108,7 +116,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // Called when the local player left the room. We need to load the Menu/Lobby scene.
     public override void OnLeftRoom()
     {
-        SceneManager.LoadScene(0);
+        PhotonNetwork.LoadLevel(0);
     }
 
     #endregion
