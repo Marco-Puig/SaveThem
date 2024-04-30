@@ -5,10 +5,10 @@ using Photon.Pun;
 public class GameManager : MonoBehaviourPun
 {
     #region Initialize
-    public static GameManager Instance { get; private set; } 
-    
+    public static GameManager Instance { get; private set; }
+
     [Header("Round Management")]
-    [SerializeField] Countdown countdown;    
+    [SerializeField] Countdown countdown;
     [SerializeField] float waitTime = 60f;
     [SerializeField] GameObject earPiecePrefab;
 

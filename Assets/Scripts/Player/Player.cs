@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Player : MonoBehaviourPunCallbacks
@@ -40,7 +41,7 @@ public class Player : MonoBehaviourPunCallbacks
 
 
     // States
-    
+
     public void Moving()
     {
         // Handle Movement
@@ -68,6 +69,7 @@ public class Player : MonoBehaviourPunCallbacks
     public void Waiting()
     {
         // for if we wait for the round or something that requires the player to not move
+        animator.Play("Idle");
         // Debug.Log("Player is waiting...");
     }
 
@@ -82,14 +84,20 @@ public class Player : MonoBehaviourPunCallbacks
         }
     }
 
-    public void Loser()
+    public async void Loser()
     {
         // for if the player is out of the game
-        // O(n) and delete childern of the player once animation (!isPlaying)
-        // Debug.Log("Player is out of the game...");
+        animator.Play("Death");
+
+        // Wait for the animation to finish
+        await Task.Delay(1200);
+
         // Remove player
-        // Destroy(gameObject);
+        Destroy(gameObject);
+
+        // Debug.Log("Player is out of the game...");
     }
+
 
     public void Winner()
     {
