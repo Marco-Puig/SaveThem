@@ -4,6 +4,9 @@ A Musical Chairs inspired Game where the last person to not earn a earpiece in a
 ## Description
 SaveThem is a game where a room of players fighting to get an earpiece, and the one player who doesn’t get the earpiece gets tackled. Where the earpiece is for security guards and the person who can’t get one is the president and gets tackled. “Mr. President, get down” sort of thing. Pretty much like musical chairs, but where a player is eliminated every round until there is only one left.
 
+# Gameplay Screenshot
+![Capture](https://github.com/Marco-Puig/SaveThem/assets/90495366/c3ab43a0-e33b-43c6-9017-b737f57f0abb)
+
 ## Art Designs
 ### Security Agent - By Grim
 ![image](https://github.com/Marco-Puig/SaveThem/assets/90495366/42dd9eea-46e5-405e-94d9-954fc4dfe979)
