@@ -103,7 +103,7 @@ public class Player : MonoBehaviourPunCallbacks
     {
         // for if the player is the last one standing
         // dance animation
-        // Debug.Log("Player is the last one standing...");
+        Debug.Log("Player is the last one standing...");
     }
 
 

@@ -1,23 +1,23 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class EarpiecePickup : MonoBehaviourPun
+public class Pickup : MonoBehaviourPun
 {
     // Pickup, destroy. Make sure Player doesnt have an earpiece already.
     void OnTriggerEnter2D(Collider2D other)
     {
         if (photonView.IsMine && other.CompareTag("Player") && !other.GetComponent<Player>().hasEarpiece)
         {
-            photonView.RPC("Pickup", RpcTarget.AllBuffered);
+            PickupItem();
             other.GetComponent<Player>().hasEarpiece = true;
         }
     }
 
-    // Sync the earpiece pickup being gone and now picked up onto the network.
-    [PunRPC]
-    void Pickup()
+    // Pickup, destroy. After making sure Player doesnt have an earpiece already.
+    void PickupItem()
     {
-        Destroy(this.gameObject);
+        Debug.Log("Picked up earpiece.");
+        Destroy(gameObject);
     }
 
     /*

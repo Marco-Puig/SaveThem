@@ -42,6 +42,7 @@ MonoBehaviour:
   - Tick
   - LobbyWait
   - Pickup
+  - PickupItem
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

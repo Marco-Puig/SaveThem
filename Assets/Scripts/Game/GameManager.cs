@@ -37,10 +37,11 @@ public class GameManager : MonoBehaviourPun
 
     # region Private Methods
     [PunRPC]
+
     void LobbyWait()
     {
         // wait for players to join for 60 seconds
-        countdown.Setup(WaitForFirstRound, waitTime, "Game starts in");
+        countdown.Setup(WaitForFirstRound, waitTime, "Waiting for more players to join:");
     }
 
     void WaitForFirstRound()
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviourPun
         {
             if (players[i].GetComponent<Player>().hasEarpiece)
             {
+                players[i].GetComponent<Player>().currentState = players[i].GetComponent<Player>().Winner;
                 playersLeft++;
             }
             else
@@ -138,20 +140,21 @@ public class GameManager : MonoBehaviourPun
 
     void EndGame()
     {
+        // check for winner
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < players.Length; i++)
         {
+            // if player has earpiece, they are the winner
             if (players[i].GetComponent<Player>().hasEarpiece)
             {
                 players[i].GetComponent<Player>().currentState = players[i].GetComponent<Player>().Winner;
                 countdown.Setup(LobbyManager.Instance.ShutdownLobby, 30.0f, "A WINNER HAS BEEN DECIDED! Ending game in");
-            }
-            else
-            {
-                players[i].GetComponent<Player>().currentState = players[i].GetComponent<Player>().Loser;
-                countdown.Setup(StartRound, 25.0f, "NO WINNER! Rematch game starts in");
+                break;
             }
         }
+
+        // if no winner, restart game
+        countdown.Setup(StartRound, 25.0f, "NO WINNER! Rematch game starts in");
     }
 
     void SpawnEarpiecePickups()
@@ -160,6 +163,8 @@ public class GameManager : MonoBehaviourPun
         for (int i = 0; i < GetPlayerCount() - 1; i++)
         {
             var position = new Vector3(UnityEngine.Random.Range(-7.29f, 8.41f), 0, UnityEngine.Random.Range(-4.46f, -1.7f));
+            // spawn earpiece
+            Debug.Log("Spawning earpiece at: " + position);
             Instantiate(earPiecePrefab, position, Quaternion.identity);
         }
     }
