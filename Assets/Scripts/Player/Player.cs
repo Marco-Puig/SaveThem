@@ -92,10 +92,11 @@ public class Player : MonoBehaviourPunCallbacks
         // Wait for the animation to finish
         await Task.Delay(1200);
 
-        // Remove player
-        Destroy(gameObject);
-
         // Debug.Log("Player is out of the game...");
+
+        // Remove player
+        if (photonView.IsMine)
+            PhotonNetwork.Destroy(gameObject);
     }
 
 

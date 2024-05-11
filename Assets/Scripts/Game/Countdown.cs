@@ -7,7 +7,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 public class Countdown : MonoBehaviourPun
-{ 
+{
     private float waitTime = 60.0f;
     private string timeMessage;
     public TMP_Text timerText;
@@ -37,5 +37,6 @@ public class Countdown : MonoBehaviourPun
         {
             functionCall?.Invoke();
         }
+
     }
 }

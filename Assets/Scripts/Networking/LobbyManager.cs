@@ -116,7 +116,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // Called when the local player left the room. We need to load the Menu/Lobby scene.
     public override void OnLeftRoom()
     {
-        PhotonNetwork.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
 
     #endregion

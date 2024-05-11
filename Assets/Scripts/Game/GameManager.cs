@@ -80,10 +80,9 @@ public class GameManager : MonoBehaviourPun
     {
         // Have players wait, in the meantime, check for anyone without an earpiece
         SetPlayersState("Waiting");
-        CheckForLoser();
 
-        // Transition to Start Wait
-        countdown.Setup(StartRound, 10.0f, "Next round starts in");
+        // check for losers and who is left, if there is only one player left, end the game, else, continue
+        CheckForLoser();
     }
 
     void SetPlayersState(string wantedState)
@@ -119,6 +118,7 @@ public class GameManager : MonoBehaviourPun
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         int playersLeft = 0;
 
+        // check for losers and who is left
         for (int i = 0; i < players.Length; i++)
         {
             if (players[i].GetComponent<Player>().hasEarpiece)
@@ -132,9 +132,15 @@ public class GameManager : MonoBehaviourPun
             }
         }
 
+        // if there is only one player left, end the game, else, continue
         if (playersLeft <= 1)
         {
             EndGame();
+        }
+        else
+        {
+            // Transition to Start Wait
+            countdown.Setup(StartRound, 10.0f, "Next round starts in");
         }
     }
 

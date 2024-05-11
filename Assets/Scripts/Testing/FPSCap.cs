@@ -18,16 +18,15 @@ public class FPSCap : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        theDeltaTime = (1.0F / frameRate);
+        theDeltaTime = 1.0F / frameRate;
         oldTime = Time.realtimeSinceStartup;
     }
-
 
     // Update is called once per frame
     void LateUpdate()
     {
         curTime = Time.realtimeSinceStartup;
-        timeTaken = (curTime - oldTime);
+        timeTaken = curTime - oldTime;
 
         if (timeTaken < theDeltaTime)
         {
