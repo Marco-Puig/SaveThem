@@ -946,8 +946,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 244.75859, y: 21.72432}
-  m_SizeDelta: {x: 478.6172, y: 37.3224}
+  m_AnchoredPosition: {x: 389.9784, y: 21.72432}
+  m_SizeDelta: {x: 769.0569, y: 37.3224}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &826652962
 MonoBehaviour:
@@ -1347,11 +1347,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdown: {fileID: 1113501299}
-  waitTime: 1
   earPiecePrefab: {fileID: 8777516231185400028, guid: a60f925657db1364b93eb70e63a08cdf, type: 3}
   lobby: {fileID: 1655924673}
   mainRoom: {fileID: 264947734}
   useLobby: 0
+  debug: 1
 --- !u!114 &1113501299
 MonoBehaviour:
   m_ObjectHideFlags: 0

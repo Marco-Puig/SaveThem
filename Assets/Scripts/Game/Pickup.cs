@@ -6,7 +6,7 @@ public class Pickup : MonoBehaviourPun
     // Pickup, destroy. Make sure Player doesnt have an earpiece already.
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (photonView.IsMine && other.CompareTag("Player") && !other.GetComponent<Player>().hasEarpiece)
+        if (other.CompareTag("Player") && !other.GetComponent<Player>().hasEarpiece)
         {
             PickupItem();
             other.GetComponent<Player>().hasEarpiece = true;

@@ -9,13 +9,15 @@ public class GameManager : MonoBehaviourPun
 
     [Header("Round Management")]
     [SerializeField] Countdown countdown;
-    [SerializeField] float waitTime = 60f;
     [SerializeField] GameObject earPiecePrefab;
 
     [Header("Lobby Setup")]
     [SerializeField] GameObject lobby;
     [SerializeField] GameObject mainRoom;
     [SerializeField] bool useLobby = false;
+
+    [Header("Debug")]
+    [SerializeField] bool debug = false;
 
     private void Awake()
     {
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviourPun
     void LobbyWait()
     {
         // wait for players to join for 60 seconds
-        countdown.Setup(WaitForFirstRound, waitTime, "Waiting for more players to join:");
+        countdown.Setup(WaitForFirstRound, debug ? 0 : 60f, "Waiting for more players to join:");
     }
 
     void WaitForFirstRound()
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviourPun
         CheckForLoser();
     }
 
+    // Setting states for all players
     void SetPlayersState(string wantedState)
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -104,13 +107,6 @@ public class GameManager : MonoBehaviourPun
                     break;
             }
         }
-    }
-
-    int GetPlayerCount()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-        return players.Length;
     }
 
     void CheckForLoser()
@@ -154,19 +150,24 @@ public class GameManager : MonoBehaviourPun
             if (players[i].GetComponent<Player>().hasEarpiece)
             {
                 players[i].GetComponent<Player>().currentState = players[i].GetComponent<Player>().Winner;
-                countdown.Setup(LobbyManager.Instance.ShutdownLobby, 30.0f, "A WINNER HAS BEEN DECIDED! Ending game in");
+                countdown.Setup(LobbyManager.Instance.ShutdownLobby, 20.0f, "A WINNER HAS BEEN DECIDED! Ending game in");
                 break;
             }
+            else
+            {
+                // if no winner, restart game
+                countdown.Setup(StartRound, 25.0f, "NO WINNER! Rematch game starts in");
+            }
         }
-
-        // if no winner, restart game
-        countdown.Setup(StartRound, 25.0f, "NO WINNER! Rematch game starts in");
     }
 
     void SpawnEarpiecePickups()
     {
+        // get player count
+        int playerCount = GameObject.FindGameObjectsWithTag("Player").Length;
+
         // instantiate pickup prefabs, always make it one less than total players (cuz musical chairs)
-        for (int i = 0; i < GetPlayerCount() - 1; i++)
+        for (int i = 0; i < playerCount - (debug ? 0 : 1); i++)
         {
             var position = new Vector3(UnityEngine.Random.Range(-7.29f, 8.41f), 0, UnityEngine.Random.Range(-4.46f, -1.7f));
             // spawn earpiece
