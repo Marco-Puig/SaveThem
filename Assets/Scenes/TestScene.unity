@@ -1351,7 +1351,7 @@ MonoBehaviour:
   lobby: {fileID: 1655924673}
   mainRoom: {fileID: 264947734}
   useLobby: 0
-  debug: 1
+  debug: 0
 --- !u!114 &1113501299
 MonoBehaviour:
   m_ObjectHideFlags: 0
